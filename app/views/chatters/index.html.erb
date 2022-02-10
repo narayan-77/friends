@@ -1,0 +1,11 @@
+
+<div id="chatters">
+  <% @chatters.each do |chatter| %>
+    <%= render chatter %>
+    <p>
+      <%= link_to "Show", chatter, class:"btn btn-secondary" %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New chatter", new_chatter_path, class:"btn btn-primary" %>

@@ -1,0 +1,38 @@
+<%= form_with(model: chatter, local:true) do |form| %>
+  <% if chatter.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(chatter.errors.count, "error") %> prohibited this chatter from being saved:</h2>
+
+      <ul>
+        <% chatter.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= form.text_field :first_name, class:"form-control", placeholder:"First Name" %>
+
+  </div>
+  <br>
+
+   <div class="form-group">
+    <%= form.text_field :last_name, class:"form-control", placeholder:"Last Name" %>
+  </div>
+  <br>
+
+   <div class="form-group">
+    <%= form.text_field :email, class:"form-control", placeholder:"Email:-" %>
+  </div>
+  
+  <br>
+
+  <div class="form-group">
+    <%= form.text_field :phone, class:"form-control", placeholder:"Phone:-" %>
+  </div>
+
+  <div class="actions"><br>
+    <%= form.submit class:"btn btn-secondary" %> |  <%= link_to "Back to chatters", chatters_path, class:"btn btn-dark" %>
+  </div>
+<% end %>
