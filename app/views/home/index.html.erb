@@ -1,3 +1,20 @@
- <br>
- <h1>New World! Begins HERE!</h1>
- come join the revolution of Creating a new Cmmunity!
+    
+ 
+  <% if user_signed_in? %>
+
+  Welcome to the Chatters..
+
+  <h1>#CRUD!</h1>
+  
+  <% else %> 
+
+  <br>
+    <h1>New World! Begins HERE!</h1>
+    come join the revolution of Creating a new Cmmunity!
+    <br>
+
+     <%= link_to "Sign Up", new_user_registration_path, class:"nav-link", class:"btn btn-secondary" %> |
+     <%= link_to "Sign In", new_user_session_path, class:"nav-link", class:"btn btn-primary" %>
+
+  <% end %> 
+ 
