@@ -31,8 +31,15 @@
   <div class="form-group">
     <%= form.text_field :phone, class:"form-control", placeholder:"Phone:-" %>
   </div>
+  <br>
+
+   <div class="form-group">
+    <%= form.number_field :user_id, id: :chatter_user_id, class:"form-control", value: current_user.id, type: :hidden %>
+  </div>
+
+ 
 
   <div class="actions"><br>
-    <%= form.submit class:"btn btn-secondary" %> |  <%= link_to "Back to chatters", chatters_path, class:"btn btn-dark" %>
+    <%= form.submit class:"btn btn-secondary" %> |  <%= link_to "Back", chatters_path, class:"btn btn-dark" %>
   </div>
 <% end %>
