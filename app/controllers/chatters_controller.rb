@@ -1,5 +1,8 @@
 class ChattersController < ApplicationController
   before_action :set_chatter, only: %i[ show edit update destroy ]
+  before_action :authenticate_user!, except: [:index, :show]
+  before_action :correct_user, only: [:edit, :update, :destroy]
+
 
   # GET /chatters or /chatters.json
   def index
@@ -12,7 +15,8 @@ class ChattersController < ApplicationController
 
   # GET /chatters/new
   def new
-    @chatter = Chatter.new
+    #@chatter = Chatter.new
+    @chatter = current_user.chatters.build
   end
 
   # GET /chatters/1/edit
@@ -21,7 +25,8 @@ class ChattersController < ApplicationController
 
   # POST /chatters or /chatters.json
   def create
-    @chatter = Chatter.new(chatter_params)
+    #@chatter = Chatter.new(chatter_params)
+    @chatter = current_user.chatters.build(chatter_params)
 
     respond_to do |format|
       if @chatter.save
@@ -57,6 +62,11 @@ class ChattersController < ApplicationController
     end
   end
 
+  def correct_user
+    @chatter = current_user.chatters.find_by(id: params[:id])
+    redirect_to chatters_path, notice: "Not authorized to edit" if @chatter.nil?
+  end  
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_chatter
@@ -65,6 +75,6 @@ class ChattersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def chatter_params
-      params.require(:chatter).permit(:first_name, :last_name, :email, :phone)
+      params.require(:chatter).permit(:first_name, :last_name, :email, :phone, :user_id)
     end
 end

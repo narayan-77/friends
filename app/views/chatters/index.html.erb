@@ -2,9 +2,11 @@
 <div id="chatters">
   <% @chatters.each do |chatter| %>
     <%= render chatter %>
+    <% if chatter.user == current_user %>
     <p>
       <%= link_to "Show", chatter, class:"btn btn-secondary" %>
     </p>
+    <% end %>
   <% end %>
 </div>
 
